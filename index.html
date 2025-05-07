@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poonam Nath</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-blue: #003049;
+      --red: #d62828;
+      --orange: #f77f00;
+      --yellow: #fcbf49;
+      --cream: #f5cc9a;
+    }
+
+    html, body {
+      scroll-behavior: auto;
+      margin: 0;
+      font-family: 'Libre Baskerville', serif;
+      background-color: var(--cream);
+      color: var(--dark-blue);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 48, 73, 0.95);
+      padding: 1rem;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: var(--yellow);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--orange);
+    }
+
+    section {
+      padding: 100px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      border-bottom: 1px solid #dcd6c1;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: var(--red);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    } 
+
+
+    .about-photo {
+      max-width: 100%;
+      width: 300px;
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1 1 300px ;
+    }
+
+    .testimonial-slider {
+      position: relative;
+      max-width: 600px;
+      margin: auto;
+      padding: 40px;
+      min-height: 120px;
+      text-align: center;
+    }
+
+    .testimonial {
+      display: none;
+      font-style: italic;
+      font-size: 1.1rem;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .testimonial.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: background 0.3s;
+      z-index: 1;
+    }
+
+    .slider-btn:hover {
+      background: var(--orange);
+    }
+
+    .slider-btn.prev {
+      left: -20px; 
+    }
+
+    .slider-btn.next {
+      right: -20px; 
+    }
+
+    .back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 1000;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  background: var(--orange);
+}
+
+
+    body::before {
+      content: '';
+      display: block;
+      height: 80px;
+    }
+
+    @media (max-width: 600px) {
+      .slider-btn.prev { left: 5px; }
+      .slider-btn.next { right: 5px; }
+
+      nav ul li a { font-size: 0.9rem; }
+
+      h2 { font-size: 1.6rem; }
+
+      p { font-size: 1rem; }
+
+      .about-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .about-photo {
+        width: 100%;
+      }
+
+      .back-to-top {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      section {
+        padding: 70px 12px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#view">Approach</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="about-container">
+      <div class="about-text">
+        <p>Poonam is a Certified Counsellor, Counselling Psychologist, and a Facilitator dedicated to empowering individuals in their transformation journey.
+          <br>She possesses a Master’s degree in Counselling Psychology and has completed a one-year certification programme in counselling skills. Additionally, she holds certification in counselling children and adolescents. In her previous avatar, leveraging her Master's degree in Computer Applications, she served as a software engineer for a prestigious company.
+          <br>Poonam possesses a comprehensive background that includes individual counselling, facilitation programs, and workshops on EQ, all rooted in holistic mental well-being. She believes in a holistic and harmonious integration of her skills to empower her clients.
+          <br>Currently, Poonam serves as a counsellor and facilitator at Prerana Academy, Counselling and Training Centre in Bengaluru. She is also associated with the NGO SAMVAD and maintains her own private practice. Her passion for helping others thrive is the driving force behind her work.
+          </p>
+      </div>
+      <img src="/images/photo.jpg" alt="Therapist Photo" class="about-photo">
+    </div>
+  </section>
+
+  <section id="view">
+    <h2>Approach to Counselling</h2>
+    <p>Counselling provides a secure and confidential environment where you are encouraged to openly discuss a wide range of topics, including your emotions, life circumstances, experiences, challenges, issues, and dilemmas. It serves as a platform for exploration, understanding, the identification of concerns, and their subsequent resolution.
+        <br>Poonam refrains from providing advice or solutions. Instead, counselling is an empowering journey in which you will be guided towards developing the capacity to independently resolve your own problems.
+        <br>Her role as a counsellor, she will assist in fostering increased self-awareness, support you in effectively addressing your challenges, and collaborate with you on personal growth and relationship enhancement as you strive to achieve your objectives. The counselling process will proceed at a pace that aligns with your comfort and readiness as her client. Therefore, the duration of the counselling process will be influenced by factors such as the complexity of the issues, the specific goals established, your availability for sessions, and your level of readiness to engage in the process.
+        <br>She will keep records of the sessions, and these records will be kept confidential. 
+      </p>
+  </section>
+
+
+  <section id="testimonials">
+    <h2>Testimonials</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial active">"I always assumed that therapy is not for me. It has been six months since I started therapy with Poonam, and it has already made a huge difference to my life." <br> -Aditi</div>
+      <div class="testimonial">"I have worked with Poonam for seven months now, and I can safely say that my journey would not have been possible without her. Her calm, gentle, and kind approach to my problems has taught me to be kind to myself."<br>-D.M</div>
+      <div class="testimonial">"Sessions with Poonam have managed to broaden my thought process and changed my outlook towards a lot of things. Her sessions are like a cup of hot chocolate on a cold winter evening."<br>-Tarun</div>
+      <button class="slider-btn prev" onclick="prevTestimonial()">←</button>
+      <button class="slider-btn next" onclick="nextTestimonial()">→</button>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: poonam_nath@hotmail.com</p>
+    <p>Phone: +91 93419 47797</p>
+  </section>
+
+  <script>
+    // Smooth scroll
+    function smoothScrollTo(target, duration = 1500) {
+      const start = window.scrollY;
+      const end = target.getBoundingClientRect().top + start - 60;
+      const distance = end - start;
+      let startTime = null;
+
+      function animation(currentTime) {
+        if (!startTime) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 4);
+        window.scrollTo(0, start + distance * ease);
+        if (progress < 1) requestAnimationFrame(animation);
+      }
+
+      requestAnimationFrame(animation);
+    }
+
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        smoothScrollTo(target);
+      });
+    });
+
+    // Back to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const backToTopBtn = document.querySelector('.back-to-top');
+
+    window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+    backToTopBtn.classList.add('visible');
+  } else {
+    backToTopBtn.classList.remove('visible');
+  }
+  });
+
+
+    // Section reveal
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+
+    // Testimonials
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+
+    function showTestimonial(index) {
+      testimonials.forEach((t, i) => {
+        t.classList.remove('active');
+        if (i === index) {
+          t.classList.add('active');
+        }
+      });
+    }
+
+    function nextTestimonial() {
+      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+      showTestimonial(currentTestimonial);
+    }
+
+    function prevTestimonial() {
+      currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+      showTestimonial(currentTestimonial);
+    }
+  </script>
+</body>
+</html>
